@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mongo, Express and Node Tutorial</title>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+  <h2>Demo of how to add Mongo + Mongoose your Node Application!</h2>
+
+  <div class="container">
+    <div class="display">
+      <h3>Display Box</h3>
+      <div class="content"></div>
+    </div>
+
+    <div class="form-wrapper">
+      <div class="content-wrapper">
+        <button id="allUsersBtn">Fetch All Users</button>
+      </div>
+      <form id="createUserForm">
+        <div class="input-wrapper">
+          <label for="name">Name</label>
+          <input id="name" placeholder="Name" name="name" type="text">
+        </div>
+        <div class="input-wrapper">
+          <label for="age">Age</label>
+          <input id="age" placeholder="Age" name="age" type="number">
+        </div>
+        <input type="text" type="hidden" id="userId">
+        <button id="createUserBtn" type="submit">Create New User</button>
+        <button id="updateUserBtn" type="submit">Update User</button>
+        <span id="cancelUpdate">cancel</span>
+      </form>
+
+      <!-- This form will not use the action or method form attributes -->
+      <!-- Instead we will use our index.js file to handle the form action -->
+      <form id="findUserForm">
+        <div class="input-wrapper">
+          <label for="userName">Search User(s) by Name</label>
+          <input id="userName" type="text" name="userName">
+        </div>
+        <button id="findUserBtn" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="container">
+    <button id="emptyDB">Empty Database</button>
+  </div>
+
+  <!-- Axios CDN -->
+  <script type="application/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- Custom index.js for application logic -->
+  <script type="application/javascript" src="js/index.js"></script>
+</body>
+
+</html>

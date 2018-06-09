@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin-bottom: 50px;
+}
+
+.container {
+  display: flex;
+  text-align: center;
+  width: 100%;
+}
+
+.form-wrapper {
+  justify-content: space-between;
+  flex: 1;
+}
+
+form {
+  padding-top: 15px;
+}
+
+form,
+.content-wrapper {
+  border: 1px solid #00F;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  max-width: 500px;
+  width: 100%;
+}
+
+#findUserForm {
+  margin-bottom: 0;
+}
+
+h2 {
+  margin: 40px 0;
+  text-align: center;
+}
+
+h3 {
+  margin-bottom: 30px;
+}
+
+.input-wrapper {
+  border: 1px solid #00F;
+  margin: 10px 25px;
+}
+
+label,
+input {
+  color: #00F;
+  display: block;
+  padding: 0 20px;
+  width: 100%;
+}
+
+label {
+  font-size: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+input {
+  border: none;
+  font-size: 14px;
+  outline: none;
+}
+
+button {
+  background-color: #FFF;
+  border: 1px solid #00F;
+  border-radius: 5px;
+  color: #00F;
+  font-size: 18px;
+  height: 50px;
+  margin: 15px auto;
+  width: 240px;
+}
+
+button:hover,
+button:active {
+  border-color: #000;
+  color: #000;
+  cursor: pointer;
+}
+
+.display {
+  border: 1px solid #00F;
+  margin: 0 25px;
+  width: 40%;
+}
+
+.content {
+  color: #F00;
+}
+
+.deleteBtn,
+.updateBtn {
+  display: inline-block;
+  height: 30px;
+  font-size: 12px;
+  margin: 0;
+  width: 90px;
+}
+
+.deleteBtn:hover,
+.deleteBtn:active {
+  border-color: #F00;
+  color: #F00;
+}
+
+#userId,
+#updateUserBtn,
+#cancelUpdate {
+  display: none;
+}
+
+#emptyDB {
+  margin: 15px auto;
+  width: 100%;
+}
