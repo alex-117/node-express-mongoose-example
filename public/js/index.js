@@ -88,7 +88,11 @@ createUserBtn.addEventListener('click', (e) => {
     name,
     age
   })
-    .then(user => usersDisplay(user.data))
+    .then(user => {
+      document.querySelector('#name').value = '';
+      document.querySelector('#age').value = '';
+      usersDisplay(user.data);
+    })
     .catch(err => console.log(err));
 });
 
@@ -116,7 +120,7 @@ updateUserBtn.addEventListener('click', e => {
   })
     .then(res => {
 
-      e.target.style.display = 'none';
+      cancelUpdate.style.display = 'none';
       updateUserBtn.style.display = 'none';
       createUserBtn.style.display = 'block';
 
