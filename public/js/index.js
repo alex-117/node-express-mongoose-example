@@ -103,9 +103,9 @@ updateUserBtn.addEventListener('click', e => {
   e.preventDefault();
 
   const data = {
-    _id: document.getElementById('userId').value,
-    name: document.getElementById('name').value,
-    age: document.getElementById('age').value
+    _id: document.querySelector('#userId').value,
+    name: document.querySelector('#name').value,
+    age: document.querySelector('#age').value
   };
   const { _id, name, age } = data;
 
@@ -114,7 +114,16 @@ updateUserBtn.addEventListener('click', e => {
     name,
     age,
   })
-    .then(res => fetchAllUsers())
+    .then(res => {
+
+      e.target.style.display = 'none';
+      updateUserBtn.style.display = 'none';
+      createUserBtn.style.display = 'block';
+
+      document.querySelector('#name').value = '';
+      document.querySelector('#age').value = '';
+      fetchAllUsers();
+    })
     .catch(err => console.log(err));
 });
 
@@ -123,6 +132,17 @@ emptyDatabse.addEventListener('click', e => {
   axios.delete('/api/empty-database')
     .then(res => fetchAllUsers())
     .catch(err => console.log(err));
+});
+
+cancelUpdate.addEventListener('click', e => {
+  e.preventDefault();
+
+  e.target.style.display = 'none';
+  updateUserBtn.style.display = 'none';
+  createUserBtn.style.display = 'block';
+
+  document.querySelector('#name').value = '';
+  document.querySelector('#age').value = '';
 });
 
 // Add an event listener to the document to allow
