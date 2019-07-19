@@ -1,12 +1,7 @@
 const mongoose = require('mongoose');
-
-// This is referred to as 'destructuring'
 const { Schema } = mongoose;
-// It's the same if you did:
-// ```const Schema = mongoose.Schema; ```
 
-
-const User = new Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -17,4 +12,6 @@ const User = new Schema({
   }
 });
 
-mongoose.model('users', User);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

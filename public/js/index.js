@@ -10,14 +10,15 @@ const emptyDatabse = document.querySelector('#emptyDB');
 // Private Methods
 //====================
 const buildDisplay = (id, name, age) => {
+  console.log({id})
   display.innerHTML += `
-                  <div class="userDisplay" data-id=${id}>
+                  <div class="userDisplay">
                       <p>Name: ${name}</p>
                       <p>Age: ${age}</p>
                       <button class="deleteBtn" type="button">
                         Delete User
                       </button>
-                      <button class="updateBtn" type="button">
+                      <button class="updateBtn" type="button" data-id=${id}>
                         Update User
                       </button>
                   </div>`;
@@ -48,7 +49,7 @@ const updateUser = id => {
 };
 
 const deleteUser = id => {
-  axios.delete(`/api/delete-user/${id}`)
+  axios.delete(`/api/user/${id}`)
     .then(res => {
       fetchAllUsers();
     })
@@ -56,9 +57,12 @@ const deleteUser = id => {
 };
 
 const fetchAllUsers = () => {
-  axios.get('/api/get-users')
-    .then(users => usersDisplay(users.data))
-    .catch(err => console.log(err));
+  axios.get('/api/users')
+    .then(users => {
+      console.log({users});
+      return usersDisplay(users.data)
+    })
+    .catch(err => console.log(err.response));
 }
 
 //====================
@@ -71,8 +75,11 @@ findUserBtn.addEventListener('submit', e => {
   const name = document.getElementById('userName').value.trim();
   if (!name || name === '') return alert('Please enter a name!');
 
-  axios.get(`/api/search-users/${name}`)
-    .then(res => usersDisplay(res.data))
+  axios.get(`/api/user/${name}`)
+    .then(res => {
+      console.log(res);
+      return usersDisplay(res.data)
+    })
     .catch(err => console.log(err));
 });
 
@@ -84,6 +91,7 @@ createUserBtn.addEventListener('click', (e) => {
     age: document.getElementById('age').value,
   };
   const { name, age } = data;
+
   axios.post('/api/post-user', {
     name,
     age
@@ -105,7 +113,7 @@ allUsersBtn.addEventListener('click', e => {
 
 updateUserBtn.addEventListener('click', e => {
   e.preventDefault();
-
+  console.log({e})
   const data = {
     _id: document.querySelector('#userId').value,
     name: document.querySelector('#name').value,
@@ -113,7 +121,7 @@ updateUserBtn.addEventListener('click', e => {
   };
   const { _id, name, age } = data;
 
-  axios.put('/api/update-user/', {
+  axios.put('/api/user', {
     _id,
     name,
     age,
@@ -152,20 +160,23 @@ cancelUpdate.addEventListener('click', e => {
 // Add an event listener to the document to allow
 // event listener functionality for dynamically created elements
 document.addEventListener('click', e => {
+  console.log(e);
   if (e.target && e.target.className === 'deleteBtn') {
-    const id = e.target.parentElement.dataset.id;
+    const id = e.target.dataset.id;
     deleteUser(id);
   }
 
   if (e.target && e.target.className === 'updateBtn') {
-    const id = e.target.parentElement.dataset.id;
+    console.log('hit')
+    const id = e.target.dataset.id;
 
     cancelUpdate.style.display = 'block';
     updateUserBtn.style.display = 'block';
     createUserBtn.style.display = 'none';
 
-    axios.get(`/api/search-users/${id}`)
+    axios.get(`/api/user/${id}`)
       .then(res => {
+      console.log("TCL: res", res)
         const { _id, name, age } = res.data[0];
         document.querySelector('#name').value = name;
         document.querySelector('#age').value = age;
